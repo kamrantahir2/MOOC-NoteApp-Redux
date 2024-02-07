@@ -3,6 +3,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote, toggleImportanceOf } from "./reducers/noteReducer";
 import NewNote from "./components/NewNote";
+import Notes from "./components/Notes";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,13 +16,7 @@ function App() {
   return (
     <div>
       <NewNote />
-      <ul>
-        {notes.map((note) => (
-          <li key={note.id} onClick={() => toggleImportance(note.id)}>
-            {note.content} <strong>{note.important ? "important" : ""}</strong>
-          </li>
-        ))}
-      </ul>
+      <Notes />
     </div>
   );
 }
