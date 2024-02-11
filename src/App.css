@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+.importance {
+  border: 2px solid white;
+  padding: 2px;
+  margin-left: 5px;
+}
+
+.importance:hover {
+  cursor: pointer;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

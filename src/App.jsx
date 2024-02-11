@@ -9,10 +9,6 @@ function App() {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state);
 
-  const toggleImportance = (id) => {
-    dispatch(toggleImportanceOf(id));
-  };
-
   return (
     <div>
       <NewNote />
