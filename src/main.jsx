@@ -6,15 +6,18 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import { createNote } from "./reducers/noteReducer.js";
 import { filterChange } from "./reducers/filterReducer.js";
+import { configureStore } from "@reduxjs/toolkit";
 
 import noteReducer from "./reducers/noteReducer.js";
 import filterReducer from "./reducers/filterReducer.js";
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  },
 });
-const store = createStore(reducer);
+// const store = createStore(reducer);
 
 store.subscribe(() => console.log(store.getState()));
 store.dispatch(
