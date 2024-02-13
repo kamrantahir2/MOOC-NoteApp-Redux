@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { createNote } from "./reducers/noteReducer.js";
 import { configureStore } from "@reduxjs/toolkit";
 import noteService from "./services/notes.js";
-import noteReducer, { appendNote } from "./reducers/noteReducer.js";
+import noteReducer, { setNotes } from "./reducers/noteReducer.js";
 import filterReducer from "./reducers/filterReducer.js";
 
 const store = configureStore({
@@ -16,11 +16,7 @@ const store = configureStore({
   },
 });
 
-noteService.getAll().then((notes) =>
-  notes.forEach((note) => {
-    store.dispatch(appendNote(note));
-  })
-);
+noteService.getAll().then((notes) => store.dispatch(setNotes(notes)));
 
 store.subscribe(() => console.log(store.getState()));
 store.dispatch(
