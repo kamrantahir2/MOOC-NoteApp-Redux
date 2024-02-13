@@ -2,13 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import { createNote } from "./reducers/noteReducer.js";
-import { filterChange } from "./reducers/filterReducer.js";
 import { configureStore } from "@reduxjs/toolkit";
-
-import noteReducer from "./reducers/noteReducer.js";
+import noteService from "./services/notes.js";
+import noteReducer, { appendNote } from "./reducers/noteReducer.js";
 import filterReducer from "./reducers/filterReducer.js";
 
 const store = configureStore({
@@ -17,7 +15,12 @@ const store = configureStore({
     filter: filterReducer,
   },
 });
-// const store = createStore(reducer);
+
+noteService.getAll().then((notes) =>
+  notes.forEach((note) => {
+    store.dispatch(appendNote(note));
+  })
+);
 
 store.subscribe(() => console.log(store.getState()));
 store.dispatch(
@@ -29,8 +32,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <App />
   </Provider>
 );
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <Provider store={store}>
-//     <div />
-//   </Provider>
-// );
