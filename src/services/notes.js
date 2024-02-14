@@ -13,4 +13,12 @@ const createNew = async (content) => {
   return response.data;
 };
 
-export default { getAll, createNew };
+const toggleImportance = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  const anecdote = response.data;
+  const updated = { ...anecdote, important: !anecdote.important };
+  const posted = await axios.put(`${baseUrl}/${id}`, updated);
+  return posted.data;
+};
+
+export default { getAll, createNew, toggleImportance };

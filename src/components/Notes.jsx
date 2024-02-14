@@ -24,13 +24,17 @@ const Notes = () => {
       : notes.filter((note) => !note.important);
   });
 
+  const handleClick = (id) => {
+    dispatch(toggleImportanceOf(id));
+  };
+
   return (
     <ul>
       {notes.map((note) => (
         <Note
           key={note.id}
           note={note}
-          handleClick={() => dispatch(toggleImportanceOf(note.id))}
+          handleClick={() => handleClick(note.id)}
         />
       ))}
     </ul>
